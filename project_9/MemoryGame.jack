@@ -1,0 +1,103 @@
+
+class MemoryGame {
+   field Board board; // the board of this game
+   field Array hidden; // the array of this game
+   field int moves_counter; // counts the number of attempts
+   field int reveled;// counts the number of reveled couples
+   field int couples;                    
+
+   /** Constructs a new memory game*/
+   constructor MemoryGame new() {
+      let hidden=Array.new(10);
+	  let hidden[0]=1;
+	  let hidden[1]=2;
+	  let hidden[2]=5;
+	  let hidden[3]=2;
+	  let hidden[4]=4;
+	  let hidden[5]=4;
+	  let hidden[6]=3;
+	  let hidden[7]=1;
+	  let hidden[8]=3;
+	  let hidden[9]=5;
+      let moves_counter = 0;  // initial state is no movement
+	  let reveled = 0;
+	  let couples = 5;
+	  let board=Board.new();
+      return this;
+   }
+
+   /** Disposes this game. */
+   method void dispose() {
+      do board.dispose();
+      do Memory.deAlloc(this);
+      return;
+   }
+
+   /** Runs the game: handles the user's inputs and moves the square accordingly */
+   method void run() {
+   	  var int first;
+	  var int second;
+      while (reveled<5) {
+	  do Output.moveCursor(0,0);
+	  let moves_counter=moves_counter+1;
+	  let first= Keyboard.readInt("pick door number");
+	  if((first<0)|(first>9)){
+	  do Output.printString("insert number of range (0,9)");
+	  do Output.println();
+	  do Output.printString("start the game again");
+	  do Output.println();
+	  do Output.printString("BYE");
+	  do Sys.wait(2000);
+	  return;
+	  }
+	  do board.play(hidden[first]);
+	  let second=Keyboard.readInt("pick door number");
+	  	  if((second<0)|(second>9)){
+	  do Output.printString("insert number of range (0,9)");
+	  do Output.println();
+	  do Output.printString("start the game again");
+	  do Output.println();
+	  do Output.printString("BYE");
+	  do Sys.wait(2000);
+	  return;
+	  }
+	  do board.play(hidden[second]);
+	 
+	  if(hidden[first] = hidden[second]) {
+		let reveled=reveled+1;
+		let couples = couples-1;
+		do Output.printString("good!!");
+		do Output.println();
+		do Output.printString("rest couples to find:");
+		do Output.println();
+		do Output.printInt(couples);
+		}else {
+		do Output.printString("no match or already found couple-try again!");
+		do Output.println();
+		do Output.printString("rest couples to find:");
+		do Output.println();
+		do Output.printInt(couples);
+		}
+		do Sys.wait(2000);
+		do Screen.clearScreen();
+	  }
+	  do Screen.clearScreen();
+	  do Output.printString("VICTORY!!!!");
+	  do Output.println();
+	  do Output.printString("you found all the couples in:");
+	  do Output.println();
+	  do Output.printInt(moves_counter);
+	  do Output.printString("moves");
+	  do Sys.wait(5000);
+	  do Screen.clearScreen();
+	  do Output.printString("try to do better next time");
+	  do Output.println();
+	  do Output.printString("BYE BYE");
+	  do Sys.wait(2000);
+	  
+	return;
+  }
+}
+
+
+

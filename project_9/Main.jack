@@ -1,0 +1,22 @@
+
+/** Initializes a new memory game and starts running it. */
+class Main {
+    function void main() {
+        var MemoryGame game;
+        let game = MemoryGame.new();
+		do Output.printString("we have 5 couples of square under 10 doors");
+		do Output.println();
+		do Output.printString("try to match all the couples in minumun moves");
+		do Output.println();
+		do Output.printString("each move insert 2 number in range (0,9)");
+		do Output.println();
+		do Sys.wait(6000);
+		do Screen.clearScreen();
+		do Output.printString("let's start!!!!");
+		do Sys.wait(1500);
+		do Screen.clearScreen();
+        do game.run();
+        do game.dispose();
+        return;
+    }
+}

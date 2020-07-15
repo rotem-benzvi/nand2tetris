@@ -1,0 +1,42 @@
+
+class Board {
+    	
+   field Array array; // array with all the cards value
+   field int size; // number of cards in this game
+ 
+ /** Constructs a new Board with a arry of numbers. */
+   constructor Board new() {
+      return this;
+   }
+
+   /** Disposes this square. */
+   method void dispose() {
+      do Memory.deAlloc(this);
+      return;
+   }
+
+   /** Draws the board on the screen. */
+   method void draw(int num) {
+	  do Screen.setColor(true);
+      do Screen.drawRectangle(150,150,150+(10*num),150+(10*num));
+      return;
+   }
+
+   /** Erases the square from the screen. */
+   method void erase(int num) {
+	do Screen.setColor(false);
+     do Screen.drawRectangle(150,150,150+(10*num),150+(10*num));
+      return;
+   }
+
+    /** set new array ad redraw it */
+   method void play(int num) {
+		do draw(num);
+		do Sys.wait(2000);
+		do erase(num);
+       
+      
+      return;
+   }
+
+}
